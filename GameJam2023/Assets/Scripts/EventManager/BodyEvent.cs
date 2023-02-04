@@ -7,7 +7,7 @@ public abstract class BodyEvent : MonoBehaviour
 
     EventManager manager;
     Navigation nav;
-    NavigationPoint eventPoint;
+    public NavigationPoint eventPoint { get; private set; }
     float TimeToReachEvent;
     float reachTimer;
     bool reachTime;

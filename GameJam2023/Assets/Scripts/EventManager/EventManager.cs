@@ -45,11 +45,12 @@ public class EventManager : MonoBehaviour
         if (PlayerLives > 0)
         {
 
-            if (runInterval && activeEvents.Count <= maxEvents)
+            if (runInterval && activeEvents.Count < maxEvents)
             {
                 if (intervalTimer >= intervalPeriod)
                 {
-                    CreateEvent();
+                    if (activeEvents.Count <= maxEvents)
+                        CreateEvent();
                     SetIntervalTime();
                 }
                 else
@@ -76,7 +77,14 @@ public class EventManager : MonoBehaviour
     void CreateEvent()
     {
         int type = Random.Range(0, eventPrefabs.Length);
-        NavigationPoint eventPoint = BodyAreas[Random.Range(0, BodyAreas.Count)];
+        List<NavigationPoint> possiblePoints = BodyAreas;
+        for (int i = 0; i < activeEvents.Count; i++)
+        {
+            possiblePoints.Remove(activeEvents[i].eventPoint);
+        }
+        NavigationPoint eventPoint = possiblePoints[Random.Range(0, BodyAreas.Count)];
+
+        
 
         GameObject eventInstance = Instantiate(eventPrefabs[type], eventPoint.eventRoot.transform);
         BodyEvent instanceEvent = eventInstance.GetComponent<BodyEvent>();
