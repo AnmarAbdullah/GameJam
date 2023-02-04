@@ -98,13 +98,25 @@ public class EventManager : MonoBehaviour
     public void EventCompleted(BodyEvent bodyEvent)
     {
         activeEvents.Remove(bodyEvent);
-        Destroy(bodyEvent.gameObject);
+        //bodyEvent.GetComponentsInChildren<Animator>().SetBool("Done", true);
+        Animator[] anim = bodyEvent.GetComponentsInChildren<Animator>();
+        for (int i = 0; i < anim.Length; i++)
+        {
+            anim[i].SetBool("Done", true);
+        }
+        Destroy(bodyEvent.gameObject,0.4f);
     }
 
     public void EventFailed(BodyEvent bodyEvent)
     {
         PlayerLives--;
         activeEvents.Remove(bodyEvent);
-        Destroy(bodyEvent.gameObject);
+       // bodyEvent.GetComponentsInChildren<Animator>().SetBool("Done", true);
+        Animator[] anim = bodyEvent.GetComponentsInChildren<Animator>();
+        for (int i = 0; i < anim.Length; i++)
+        {
+            anim[i].SetBool("Done", true);
+        }
+        Destroy(bodyEvent.gameObject, 0.4f);
     }
 }
