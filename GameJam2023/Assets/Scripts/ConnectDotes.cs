@@ -11,7 +11,7 @@ public class ConnectDotes : MonoBehaviour
     public List<Transform> Planned = new List<Transform>();
     public Transform dotsToSpawn;
     
-    [SerializeField] int amountToSpawn;
+    [SerializeField] public int amountToSpawn;
     [SerializeField] float Duration;
     bool eventStarted;
 
@@ -22,10 +22,10 @@ public class ConnectDotes : MonoBehaviour
     {
         lr = GetComponent<LineRenderer>();
         //Spawn(amountToSpawn);
-        StartEvent();
+        //StartEvent();
     }
 
-    public void SetValues(int amount, int duration)
+    public void SetValues(int amount, float duration)
     {
         amountToSpawn = amount;
         Duration = duration;
@@ -84,44 +84,45 @@ public class ConnectDotes : MonoBehaviour
         if (eventStarted)
         {
             Duration -= Time.deltaTime;
-            if(Duration <= 0)
+            if (Duration <= 0)
             {
                 // Activate Loss Condition
                 Debug.Log("loss");
                 eventStarted = false;
             }
-        }
 
-        if(points != null)
-        {
-            for (int i = 0; i < points.Count; i++)
+
+            if (points != null)
             {
-                if(points[i] != Planned[i])
+                for (int i = 0; i < points.Count; i++)
                 {
-                    // Activate Loss Condition
-                    Debug.Log("loss");
+                    if (points[i] != Planned[i])
+                    {
+                        // Activate Loss Condition
+                        Debug.Log("loss");
+                    }
                 }
             }
-        }
 
-        if(points.Count == Planned.Count)
-        {
-            //activate win condition
-            print("win");
-            eventStarted = false;
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            print("Mouse Clicked");
-            if (Physics.Raycast(ray, out hit, 100))
+            if (points.Count == Planned.Count)
             {
-                makeLine(hit.collider.transform);
-                indic.position = hit.collider.transform.position;
-                print(hit.collider.name);
-                if (hit.collider != null) { }
+                //activate win condition
+                print("win");
+                eventStarted = false;
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                print("Mouse Clicked");
+                if (Physics.Raycast(ray, out hit, 100))
+                {
+                    makeLine(hit.collider.transform);
+                    indic.position = hit.collider.transform.position;
+                    print(hit.collider.name);
+                    if (hit.collider != null) { }
+                }
             }
         }
     }

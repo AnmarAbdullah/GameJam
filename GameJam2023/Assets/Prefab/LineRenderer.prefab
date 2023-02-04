@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2727438167127431295}
   - component: {fileID: 2727438167127431294}
+  - component: {fileID: 4190985007914394184}
   - component: {fileID: 2727438167127431233}
   m_Layer: 0
   m_Name: LineRenderer
@@ -131,6 +132,18 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &4190985007914394184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2727438167127431292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83769c95e3f28c344856be7838d33bb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2727438167127431233
 MonoBehaviour:
   m_ObjectHideFlags: 0
