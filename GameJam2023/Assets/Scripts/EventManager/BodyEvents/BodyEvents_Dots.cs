@@ -13,7 +13,8 @@ public class BodyEvents_Dots : BodyEvent
     {
         base.CreateEvent(eManager, point, timeToReach);
 
-        transform.position = point.transform.position;
+        Vector3 pos = point.transform.position;
+        transform.position = pos;
         dots = GetComponent<ConnectDots>();
         dots.SetValues(amount, (int)duration);
     }
