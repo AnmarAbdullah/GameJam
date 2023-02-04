@@ -49,12 +49,13 @@ public class QTEEvent : MonoBehaviour
 {
     [Header("Event settings")]
     public List<QTEKey> keys = new List<QTEKey>();
-    public QTETimeType timeType;
+    public QTETimeType timeType = QTETimeType.Normal;
     public float time = 3f;
-    public bool failOnWrongKey;
-    public QTEPressType pressType;
+    public bool failOnWrongKey = true;
+    public QTEPressType pressType = QTEPressType.Single;
     [Header("UI")]
     public QTEUI keyboardUI;
+    public GameObject eventButton;
 #if ENABLE_INPUT_SYSTEM
     public QTEUI gamepadXBOXUI;
     public QTEUI gamepadDualShockUI;
@@ -63,7 +64,18 @@ public class QTEEvent : MonoBehaviour
 #endif
     [Header("Event actions")]
     public UnityEvent onStart;
-    public UnityEvent onEnd;
+    //public UnityEvent onEnd;
     public UnityEvent onSuccess;
     public UnityEvent onFail;
+
+    void Awake()
+    {
+        eventButton.SetActive(true);
+    }
+
+    void SetTSEventData(List<QTEKey> inputKeys, float eventDuration)
+    {
+        keys = inputKeys;
+        time = eventDuration;
+    }
 }

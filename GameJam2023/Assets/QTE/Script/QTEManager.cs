@@ -63,17 +63,15 @@ public class QTEManager : MonoBehaviour
         }
         keys = new List<QTEKey>(eventData.keys);
 #else
-        string seq = "";
+        string seq = "";        //For Debugging
 
         for (int i = 0; i < eventData.keys.Count; i++)
         {
             keys.Add(eventData.keys[Random.Range(0, eventData.keys.Count)]);
-            seq += keys[i].keyboardKey.ToString();   
+            seq += keys[i].keyboardKey.ToString();        //For Debugging   
         }
 
-        Debug.Log(seq);
-
-        //keys = new List<QTEKey>(eventData.keys);
+        Debug.Log(seq);        //For Debugging
 #endif
         if (eventData.onStart != null)
         {
@@ -133,10 +131,8 @@ public class QTEManager : MonoBehaviour
         {
             ui.eventUI.SetActive(false);
         }
-        if (eventData.onEnd != null)
-        {
-            eventData.onEnd.Invoke();
-        }
+        
+        //Should call events
         if (eventData.onFail != null && isFail)
         {
             eventData.onFail.Invoke();
@@ -211,13 +207,13 @@ public class QTEManager : MonoBehaviour
 
             if (key.keyboardKey == keys[0].keyboardKey)
             {
-                Debug.Log(key.keyboardKey.ToString());
+                Debug.Log(key.keyboardKey.ToString());      //For Debugging
                 keys.Remove(key);
             }
             else
             {
                 isFail = true;
-                Debug.Log("Incorrect Input");
+                Debug.Log("Incorrect Input");      //For Debugging
             }
         }
         if (Input.GetKeyUp(key.keyboardKey) && eventData.pressType == QTEPressType.Simultaneously)
