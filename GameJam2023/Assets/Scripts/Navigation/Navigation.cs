@@ -7,7 +7,7 @@ public class Navigation : MonoBehaviour
 
     public GameObject Camera;
     public NavigationPoint startingPoint;
-    NavigationPoint currentPoint;
+    public NavigationPoint currentPoint { get; private set; }
 
     // Start is called before the first frame update
     void Start()

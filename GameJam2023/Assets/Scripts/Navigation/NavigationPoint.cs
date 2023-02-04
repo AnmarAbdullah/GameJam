@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class NavigationPoint : MonoBehaviour
 {
+    public bool isBrain;
 
     public NavigationPoint[] ConnectedPoints;
     public GameObject aimRoot;
