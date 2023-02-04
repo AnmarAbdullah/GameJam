@@ -19,6 +19,7 @@ public class ConnectDots : MonoBehaviour
     public Transform lastPoints;
     public Transform indic;
 
+
     BodyEvents_Dots ev;
 
     void Awake()
@@ -50,7 +51,7 @@ public class ConnectDots : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            Vector2 pos = Random.insideUnitCircle * 3;
+            Vector2 pos = Random.insideUnitCircle * 4;
 
             Transform obj = Instantiate(dotsToSpawn, transform);
             obj.position = transform.position + new Vector3(pos.x, pos.y, 0);
@@ -101,6 +102,7 @@ public class ConnectDots : MonoBehaviour
             {
                 // Activate Loss Condition
                 Debug.Log("loss");
+                lr.enabled=false;
                 ev.Failed();
                 eventStarted = false;
             }
@@ -113,6 +115,7 @@ public class ConnectDots : MonoBehaviour
                     {
                         // Activate Loss Condition
                         Debug.Log("loss");
+                        lr.enabled = false;
                         ev.Failed();
                     }
                 }
@@ -121,6 +124,7 @@ public class ConnectDots : MonoBehaviour
             if (points.Count == Planned.Count)
             {
                 //activate win condition
+                lr.enabled = false;
                 print("win");
                 ev.Completed();
                 eventStarted = false;

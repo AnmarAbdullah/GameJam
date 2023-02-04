@@ -74,7 +74,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190335
+    rgba: 255
   m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 7047759631416118095}
   - component: {fileID: 7047759631416118094}
   - component: {fileID: 8646930737060052777}
+  - component: {fileID: 1512747085488696555}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -162,7 +163,7 @@ Transform:
   m_GameObject: {fileID: 7047759631416118080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.15, y: 1.56, z: -1.5448284}
-  m_LocalScale: {x: 1.7471287, y: 1.7471287, z: 1.7471287}
+  m_LocalScale: {x: 0.905135, y: 0.905135, z: 0.905135}
   m_Children:
   - {fileID: 445487627637641456}
   m_Father: {fileID: 0}
@@ -179,8 +180,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.135855, y: 2.0054786, z: 0.02242928}
-  m_Center: {x: -0.054560214, y: -0.21145557, z: 0.001339013}
+  m_Size: {x: 2.135855, y: 2.0054786, z: 0.26811624}
+  m_Center: {x: -0.05456021, y: -0.21145555, z: -0.0035809476}
 --- !u!212 &7047759631416118094
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -248,6 +249,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &1512747085488696555
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7047759631416118080}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: afcb7ffa23b4e7346a353c87f3199925, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8739583374851548320
 GameObject:
   m_ObjectHideFlags: 0
