@@ -14,10 +14,10 @@ public class QTEManager : MonoBehaviour
 {
     [Header("Configuration")]
     public float slowMotionTimeScale = 0.1f;
+    public QTEEvent eventData;
 
     [HideInInspector]
     private bool isEventStarted;
-    private QTEEvent eventData;
     private bool isAllButtonsPressed;
     private bool isFail;
     private bool isEnded;
@@ -52,9 +52,8 @@ public class QTEManager : MonoBehaviour
         }
     }
 
-    public void startEvent(QTEEvent eventScriptable)
+    public void startEvent()
     {
-        eventData = eventScriptable;
 #if ENABLE_INPUT_SYSTEM
         if (Keyboard.current == null)
         {
@@ -82,7 +81,7 @@ public class QTEManager : MonoBehaviour
         isFail = false;
         isPaused = false;
         rememberTimeScale = Time.timeScale;
-        switch (eventScriptable.timeType)
+        switch (eventData.timeType)
         {
             case QTETimeType.Slow:
                 Time.timeScale = slowMotionTimeScale;

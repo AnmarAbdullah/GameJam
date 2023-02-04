@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -40,7 +41,7 @@ public class QTEKey
 public class QTEUI
 {
     public GameObject eventUI;
-    public Text eventText;
+    public TextMeshProUGUI eventText;
     public Text eventTimerText;
     public Image eventTimerImage;
 }
@@ -55,7 +56,7 @@ public class QTEEvent : MonoBehaviour
     public QTEPressType pressType = QTEPressType.Single;
     [Header("UI")]
     public QTEUI keyboardUI;
-    public GameObject eventButton;
+    //public GameObject eventButton;
 #if ENABLE_INPUT_SYSTEM
     public QTEUI gamepadXBOXUI;
     public QTEUI gamepadDualShockUI;
@@ -68,12 +69,12 @@ public class QTEEvent : MonoBehaviour
     public UnityEvent onSuccess;
     public UnityEvent onFail;
 
-    void Awake()
+    /*void Awake()
     {
         eventButton.SetActive(true);
-    }
+    }*/
 
-    void SetTSEventData(List<QTEKey> inputKeys, float eventDuration)
+    public void SetTSValues(List<QTEKey> inputKeys, float eventDuration)
     {
         keys = inputKeys;
         time = eventDuration;
