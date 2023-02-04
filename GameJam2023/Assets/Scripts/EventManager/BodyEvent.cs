@@ -49,4 +49,14 @@ public abstract class BodyEvent : MonoBehaviour
         reachTime = false;
         Debug.Log("Player Started Event");
     }
+
+    public void Completed()
+    {
+        manager.EventCompleted(this);
+    }
+
+    public void Failed()
+    {
+        manager.EventFailed(this);
+    }
 }

@@ -78,7 +78,7 @@ public class EventManager : MonoBehaviour
         int type = Random.Range(0, eventPrefabs.Length);
         NavigationPoint eventPoint = BodyAreas[Random.Range(0, BodyAreas.Count)];
 
-        GameObject eventInstance = Instantiate(eventPrefabs[type], eventPoint.aimRoot.transform);
+        GameObject eventInstance = Instantiate(eventPrefabs[type], eventPoint.eventRoot.transform);
         BodyEvent instanceEvent = eventInstance.GetComponent<BodyEvent>();
 
         instanceEvent.CreateEvent(this, eventPoint, TimeToReachEvent);

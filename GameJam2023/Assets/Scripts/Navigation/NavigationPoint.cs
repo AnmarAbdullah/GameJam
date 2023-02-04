@@ -8,6 +8,7 @@ public class NavigationPoint : MonoBehaviour
 
     public NavigationPoint[] ConnectedPoints;
     public GameObject aimRoot;
+    public GameObject eventRoot;
     public GameObject aimPrefab;
 
     // Start is called before the first frame update
