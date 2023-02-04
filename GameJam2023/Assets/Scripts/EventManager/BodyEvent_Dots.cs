@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class BodyEvent_Dots : BodyEvent
 {
-    ConnectDotes dots;
+    ConnectDots dots;
 
     public override void CreateEvent(EventManager eManager, NavigationPoint point, float timeToReach)
     {
         base.CreateEvent(eManager, point, timeToReach);
 
         // Setup values;
-        dots.GetComponent<ConnectDotes>();
-        dots.SetValues(dots.amountToSpawn, timeToReach);
+        dots.GetComponent<ConnectDots>();
+        dots.SetValues(dots.amountToSpawn, dots.Duration);
 
     }
 
