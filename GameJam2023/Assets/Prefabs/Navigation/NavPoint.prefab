@@ -162,8 +162,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e2c68b4a65658546875b290eb092d86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBrain: 0
   ConnectedPoints: []
   aimRoot: {fileID: 8276262136896448089}
+  eventRoot: {fileID: 8276262135879743500}
   aimPrefab: {fileID: 874788862133284574, guid: 84880a4fbc3b2124cb73fc1315f9aa1c, type: 3}
 --- !u!1 &8276262136896448089
 GameObject:

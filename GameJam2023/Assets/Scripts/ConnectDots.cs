@@ -4,28 +4,31 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ConnectDotes : MonoBehaviour
+public class ConnectDots : MonoBehaviour
 {
     LineRenderer lr;
     public List<Transform> points = new List<Transform>();
     public List<Transform> Planned = new List<Transform>();
     public Transform dotsToSpawn;
-    
-    [SerializeField] public int amountToSpawn;
+
+    [SerializeField] int amountToSpawn;
     [SerializeField] float Duration;
     bool eventStarted;
 
     public Transform lastPoints;
     public Transform indic;
 
-    void Start()
+    BodyEvents_Dots ev;
+
+    void Awake()
     {
         lr = GetComponent<LineRenderer>();
+        ev = GetComponent<BodyEvents_Dots>();
         //Spawn(amountToSpawn);
         //StartEvent();
     }
 
-    public void SetValues(int amount, float duration)
+    public void SetValues(int amount, int duration)
     {
         amountToSpawn = amount;
         Duration = duration;
@@ -43,8 +46,9 @@ public class ConnectDotes : MonoBehaviour
         {
             Vector2 pos = Random.insideUnitCircle * 2;
 
-            Transform obj = Instantiate(dotsToSpawn, pos, Quaternion.identity);
-            Planned.Add(obj); 
+            Transform obj = Instantiate(dotsToSpawn, transform);
+            obj.position = pos;
+            Planned.Add(obj);
         }
 
         for (int i = 0; i < Planned.Count; i++)
@@ -56,7 +60,7 @@ public class ConnectDotes : MonoBehaviour
 
     void makeLine(Transform finalpoint)
     {
-        if(lastPoints == null)
+        if (lastPoints == null)
         {
             lastPoints = finalpoint;
             points.Add(finalpoint);
@@ -88,9 +92,9 @@ public class ConnectDotes : MonoBehaviour
             {
                 // Activate Loss Condition
                 Debug.Log("loss");
+                ev.Failed();
                 eventStarted = false;
             }
-
 
             if (points != null)
             {
@@ -100,6 +104,7 @@ public class ConnectDotes : MonoBehaviour
                     {
                         // Activate Loss Condition
                         Debug.Log("loss");
+                        ev.Failed();
                     }
                 }
             }
@@ -108,6 +113,7 @@ public class ConnectDotes : MonoBehaviour
             {
                 //activate win condition
                 print("win");
+                ev.Completed();
                 eventStarted = false;
             }
 
