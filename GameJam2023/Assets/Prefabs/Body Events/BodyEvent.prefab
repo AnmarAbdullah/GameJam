@@ -273,3 +273,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e775cf2e6ea47964fa0688213c69b142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeSlider: {fileID: 0}
+  NotiPrefab: {fileID: 1365517833701255112, guid: e5133a600d3d38b47a2c15b496dc28cc, type: 3}
