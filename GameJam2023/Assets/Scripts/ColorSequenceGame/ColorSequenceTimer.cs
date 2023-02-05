@@ -4,20 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class MazeTimer : MonoBehaviour
+public class ColorSequenceTimer : MonoBehaviour
 {
     float currentTime;
     public float startingTime = 10f;
     bool running;
 
-    InstantiateMaze manager;
-
-    public void SetManager(InstantiateMaze manager)
-    {
-        this.manager = manager;
-    }
+    BodyEvent_ColorOrder manager;
 
     [SerializeField] TextMeshProUGUI countdownText;
+    void Start()
+    {
+        currentTime = startingTime;
+    }
     void Update()
     {
         if (running)
@@ -29,20 +28,16 @@ public class MazeTimer : MonoBehaviour
             if (currentTime <= 0)
             {
                 currentTime = 0;
-                // Your Code Here
+                Debug.Log("You lost the order of colors game");
                 manager.Failed();
-                Debug.Log("System Failure");
             }
         }
     }
 
-    public void SetValues(float time)
-    {
-        currentTime = time;
-    }
-
-    public void StartTimer()
+    public void StartTimer(float duration, BodyEvent_ColorOrder man)
     {
         running = true;
+        manager = man;
+        currentTime = duration;
     }
 }
