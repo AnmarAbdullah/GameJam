@@ -130,7 +130,7 @@ public class QTEManager : MonoBehaviour
         {
             ui.eventUI.SetActive(false);
         }
-        
+
         //Should call events
         if (eventData.onFail != null && isFail)
         {
@@ -288,8 +288,9 @@ public class QTEManager : MonoBehaviour
         {
             ui.eventText.text = "";
             //eventData.keys.ForEach(key => ui.eventText.text += key.keyboardKey + "+");
-
+            
             keys.ForEach(key => ui.eventText.text += key.keyboardKey + " ");
+
             eventData.keyboardUI.eventText.text = ui.eventText.text.Remove(ui.eventText.text.Length - 1);
         }
         if (ui.eventUI != null)
