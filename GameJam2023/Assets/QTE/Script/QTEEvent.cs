@@ -54,8 +54,11 @@ public class QTEEvent : MonoBehaviour
     public float time = 3f;
     public bool failOnWrongKey = true;
     public QTEPressType pressType = QTEPressType.Single;
+    
     [Header("UI")]
     public QTEUI keyboardUI;
+    public Slider sequenceSlider;
+
     //public GameObject eventButton;
 #if ENABLE_INPUT_SYSTEM
     public QTEUI gamepadXBOXUI;
@@ -63,6 +66,7 @@ public class QTEEvent : MonoBehaviour
 #else
     public QTEUI gamepadUI;
 #endif
+    
     [Header("Event actions")]
     public UnityEvent onStart;
     //public UnityEvent onEnd;
@@ -78,5 +82,7 @@ public class QTEEvent : MonoBehaviour
     {
         keys = inputKeys;
         time = eventDuration;
+
+        sequenceSlider.maxValue = time;
     }
 }
