@@ -477,6 +477,8 @@ MonoBehaviour:
   heartUI: {fileID: 2800000, guid: a10ba7cc7ac0b3645827389b8a7aaf47, type: 3}
   lungsUI: {fileID: 2800000, guid: 6d3881d300ea9a042ae20e58a2231aca, type: 3}
   StomachUI: {fileID: 2800000, guid: e2b50bc2ac5ff4848b1d0d04a2adc91b, type: 3}
+  LiverUI: {fileID: 2800000, guid: 3e0f043950c75c54a8ac351e8700070f, type: 3}
+  KidneysUI: {fileID: 2800000, guid: 0b51cdf6c13c52a46825232bc7d9bb4c, type: 3}
   amount: 3
   duration: 120
 --- !u!1 &3984696325443278740

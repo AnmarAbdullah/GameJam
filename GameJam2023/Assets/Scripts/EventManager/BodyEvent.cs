@@ -27,6 +27,8 @@ public abstract class BodyEvent : MonoBehaviour
     [SerializeField] Texture heartUI;
     [SerializeField] Texture lungsUI;
     [SerializeField] Texture StomachUI;
+    [SerializeField] Texture LiverUI;
+    [SerializeField] Texture KidneysUI;
 
     // Start is called before the first frame update
     void Awake()
@@ -92,6 +94,12 @@ public abstract class BodyEvent : MonoBehaviour
                 break;
 
             case "Stomach":
+                target.texture = StomachUI;
+                break;
+            case "Kidneys":
+                target.texture = StomachUI;
+                break;
+            case "Liver":
                 target.texture = StomachUI;
                 break;
         }

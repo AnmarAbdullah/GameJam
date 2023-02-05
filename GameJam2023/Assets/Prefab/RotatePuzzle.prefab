@@ -260,9 +260,11 @@ MonoBehaviour:
   IconRoot: {fileID: 0}
   IconPrefab: {fileID: 0}
   NotiPrefab: {fileID: 1365517833701255112, guid: e5133a600d3d38b47a2c15b496dc28cc, type: 3}
-  heartUI: {fileID: 0}
-  lungsUI: {fileID: 0}
-  StomachUI: {fileID: 0}
+  heartUI: {fileID: 2800000, guid: a10ba7cc7ac0b3645827389b8a7aaf47, type: 3}
+  lungsUI: {fileID: 2800000, guid: 6d3881d300ea9a042ae20e58a2231aca, type: 3}
+  StomachUI: {fileID: 2800000, guid: e2b50bc2ac5ff4848b1d0d04a2adc91b, type: 3}
+  LiverUI: {fileID: 2800000, guid: 3e0f043950c75c54a8ac351e8700070f, type: 3}
+  KidneysUI: {fileID: 2800000, guid: 0b51cdf6c13c52a46825232bc7d9bb4c, type: 3}
 --- !u!114 &2020326704350386205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,3 +285,4 @@ MonoBehaviour:
   arrow: {fileID: 2020326703681412959}
   duration: 136.95
   amountOfSpawns: 1
+  slider: {fileID: 0}
