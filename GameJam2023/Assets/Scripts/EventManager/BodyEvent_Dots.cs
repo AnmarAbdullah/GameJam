@@ -6,9 +6,9 @@ public class BodyEvent_Dots : BodyEvent
 {
     ConnectDots dots;
 
-    public override void CreateEvent(EventManager eManager, NavigationPoint point, float timeToReach)
+    public override void CreateEvent(EventManager eManager, NavigationPoint point, float timeToReach, float diffPrecent)
     {
-        base.CreateEvent(eManager, point, timeToReach);
+        base.CreateEvent(eManager, point, timeToReach, diffPrecent);
 
         // Setup values;
         dots.GetComponent<ConnectDots>();

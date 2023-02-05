@@ -9,13 +9,16 @@ public class BodyEvents_Dots : BodyEvent
 
     ConnectDots dots;
 
-    public override void CreateEvent(EventManager eManager, NavigationPoint point, float timeToReach)
+    public override void CreateEvent(EventManager eManager, NavigationPoint point, float timeToReach, float diffPrecent)
     {
-        base.CreateEvent(eManager, point, timeToReach);
+        base.CreateEvent(eManager, point, timeToReach, diffPrecent);
 
-        transform.position = point.transform.position;
+        int diffIndex = (int)data.dotsCurve.Evaluate(diffPrecent);
+
+        Vector3 pos = point.transform.position;
+        transform.position = pos;
         dots = GetComponent<ConnectDots>();
-        dots.SetValues(amount, (int)duration);
+        dots.SetValues(data.DotsDifficulty[diffIndex].amountToSpawn, (int)data.DotsDifficulty[diffIndex].eventDuration);
     }
 
     public override void StartEvent()
