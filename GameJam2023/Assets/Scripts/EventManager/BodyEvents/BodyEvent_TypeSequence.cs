@@ -17,15 +17,15 @@ public class BodyEvent_TypeSequence : BodyEvent
 
         int diffIndex = (int)data.sequenceCurve.Evaluate(diffPrecent);
 
-
         typeSeqManager = GetComponent<QTEManager>();
         typeSeqEvent = typeSeqManager.eventData;
 
-        List<QTEKey> keys = new List<QTEKey>();
-        for (int i = 0; i < data.SequenceDifficulty[diffIndex].sequenceCount; i++)
-            keys.Add(data.possibleKeys[Random.Range(0, data.possibleKeys.Count)]);
-
-        typeSeqEvent.SetTSValues(keys, data.SequenceDifficulty[diffIndex].eventDuration);
+        //List<QTEKey> keys = new List<QTEKey>();
+        //for (int i = 0; i < data.SequenceDifficulty[diffIndex].sequenceCount; i++)
+        //    keys.Add(data.possibleKeys[Random.Range(0, data.possibleKeys.Count)]);
+        int keys = data.SequenceDifficulty[diffIndex].sequenceCount;
+        typeSeqManager.SetSize(keys);
+        typeSeqEvent.SetTSValues(data.possibleKeys, data.SequenceDifficulty[diffIndex].eventDuration);
     }
 
     public override void StartEvent()

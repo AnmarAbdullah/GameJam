@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 074478b9b77b01e449fc76a27726daa1, type: 3}
-  m_Name: _Difficulties_Data
+  m_Name: _Difficulties_Data 1
   m_EditorClassIdentifier: 
   intervalCurve:
     serializedVersion: 2
@@ -187,27 +187,6 @@ MonoBehaviour:
   - keyboardKey: 101
     gamepadXBOXKey: 0
     gamepadDualShockKey: 0
-  - keyboardKey: 114
-    gamepadXBOXKey: 0
-    gamepadDualShockKey: 0
-  - keyboardKey: 116
-    gamepadXBOXKey: 0
-    gamepadDualShockKey: 0
-  - keyboardKey: 121
-    gamepadXBOXKey: 0
-    gamepadDualShockKey: 0
-  - keyboardKey: 117
-    gamepadXBOXKey: 0
-    gamepadDualShockKey: 0
-  - keyboardKey: 105
-    gamepadXBOXKey: 0
-    gamepadDualShockKey: 0
-  - keyboardKey: 111
-    gamepadXBOXKey: 0
-    gamepadDualShockKey: 0
-  - keyboardKey: 112
-    gamepadXBOXKey: 0
-    gamepadDualShockKey: 0
   - keyboardKey: 97
     gamepadXBOXKey: 0
     gamepadDualShockKey: 0
@@ -217,24 +196,6 @@ MonoBehaviour:
   - keyboardKey: 100
     gamepadXBOXKey: 0
     gamepadDualShockKey: 0
-  - keyboardKey: 102
-    gamepadXBOXKey: 0
-    gamepadDualShockKey: 0
-  - keyboardKey: 103
-    gamepadXBOXKey: 0
-    gamepadDualShockKey: 0
-  - keyboardKey: 104
-    gamepadXBOXKey: 0
-    gamepadDualShockKey: 0
-  - keyboardKey: 106
-    gamepadXBOXKey: 0
-    gamepadDualShockKey: 0
-  - keyboardKey: 107
-    gamepadXBOXKey: 0
-    gamepadDualShockKey: 0
-  - keyboardKey: 108
-    gamepadXBOXKey: 0
-    gamepadDualShockKey: 0
   - keyboardKey: 122
     gamepadXBOXKey: 0
     gamepadDualShockKey: 0
@@ -242,18 +203,6 @@ MonoBehaviour:
     gamepadXBOXKey: 0
     gamepadDualShockKey: 0
   - keyboardKey: 99
-    gamepadXBOXKey: 0
-    gamepadDualShockKey: 0
-  - keyboardKey: 118
-    gamepadXBOXKey: 0
-    gamepadDualShockKey: 0
-  - keyboardKey: 98
-    gamepadXBOXKey: 0
-    gamepadDualShockKey: 0
-  - keyboardKey: 110
-    gamepadXBOXKey: 0
-    gamepadDualShockKey: 0
-  - keyboardKey: 109
     gamepadXBOXKey: 0
     gamepadDualShockKey: 0
   SequenceDifficulty:
@@ -267,7 +216,7 @@ MonoBehaviour:
     eventDuration: 15
   - sequenceCount: 8
     eventDuration: 10
-  rotateCurve:
+  pathCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -318,14 +267,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  RotateDifficulty:
-  - speed: 50
-    eventDuration: 30
-  - speed: 60
-    eventDuration: 25
-  - speed: 70
-    eventDuration: 20
-  - speed: 80
-    eventDuration: 15
-  - speed: 80
-    eventDuration: 10
+  PathDifficulty: []

@@ -88,6 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef6d1f2f3599c14f96cf826035685b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startedColor: {r: 0, g: 0, b: 1, a: 1}
   flashCurve:
     serializedVersion: 2
     m_Curve:

@@ -117,6 +117,7 @@ public abstract class BodyEvent : MonoBehaviour
     public virtual void StartEvent()
     {
         reachTime = false;
+        Icon.GetComponent<EventIcon>().EventStarted();
         Debug.Log("Player Started Event");
     }
 

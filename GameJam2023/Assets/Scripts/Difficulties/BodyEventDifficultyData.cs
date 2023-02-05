@@ -21,9 +21,9 @@ public class BodyEventDifficultyData : ScriptableObject
     public List<QTEKey> possibleKeys;
     public SequenceDifficulty[] SequenceDifficulty;
 
-    [Header("Path")]
-    public AnimationCurve pathCurve;
-    public PathDifficulty[] PathDifficulty;
+    [Header("Rotate")]
+    public AnimationCurve rotateCurve;
+    public RotDifficulty[] RotateDifficulty;
 }
 
 [System.Serializable]
@@ -49,7 +49,8 @@ public class SequenceDifficulty
 }
 
 [System.Serializable]
-public class PathDifficulty
+public class RotDifficulty
 {
+    public float speed;
     public float eventDuration;
 }

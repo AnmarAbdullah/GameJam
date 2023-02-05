@@ -10,8 +10,9 @@ public class EventManager : MonoBehaviour
 
     public int lives;
     int PlayerLives;
+    int PlayerFullLives;
     bool gameOver;
-    public Slider LifeSlider;
+    public Image LifeSlider;
 
     public float GameDuration;
     public TMP_Text timerText;
@@ -36,8 +37,8 @@ public class EventManager : MonoBehaviour
     {
         activeEvents = new List<BodyEvent>();
         PlayerLives = lives;
-        LifeSlider.maxValue = lives;
-        LifeSlider.value = lives;
+        PlayerFullLives = lives;
+        LifeSlider.fillAmount = (float)PlayerLives / (float)PlayerFullLives;
 
         SetIntervalTime();
         //BodyAreas.AddRange(FindObjectsOfType<NavigationPoint>());
@@ -172,7 +173,8 @@ public class EventManager : MonoBehaviour
     public void EventFailed(BodyEvent bodyEvent)
     {
         PlayerLives--;
-        LifeSlider.value = PlayerLives;
+        float amount = 0 + ((float)PlayerLives / (float)PlayerFullLives);
+        LifeSlider.fillAmount = amount;
         activeEvents.Remove(bodyEvent);
         // bodyEvent.GetComponentsInChildren<Animator>().SetBool("Done", true);
         Animator[] anim = bodyEvent.GetComponentsInChildren<Animator>();
