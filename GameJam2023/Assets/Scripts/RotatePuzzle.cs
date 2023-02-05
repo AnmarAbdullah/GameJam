@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RotatePuzzle : MonoBehaviour
 {
@@ -13,19 +14,26 @@ public class RotatePuzzle : MonoBehaviour
     [SerializeField] float duration;
 
     [SerializeField] int amountOfSpawns;
+    [SerializeField] Slider slider;
     private void Start()
     {
         transform.rotation = Quaternion.Euler(Random.Range(1,360), 90, 0);
-        CreateElement();
-        
+        CreateElement();       
     }
 
+    public void StartEvent()
+    {
+        eventStarted = true;
+        slider.gameObject.SetActive(true);
+        slider.maxValue = duration;
+    }
 
     private void Update()
     {
         if (eventStarted)
         {
             duration -= Time.deltaTime;
+            slider.value = duration;
             if(duration <= 0)
             {
                 // Activate Loss Event
