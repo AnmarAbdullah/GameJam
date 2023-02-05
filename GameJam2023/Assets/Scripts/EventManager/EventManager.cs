@@ -77,6 +77,7 @@ public class EventManager : MonoBehaviour
         {
             gameComplete = true;
             Debug.Log("You Beat The Game");
+            GameComplete();
         }
 
         if (!gameComplete || !gameOver)
@@ -102,6 +103,7 @@ public class EventManager : MonoBehaviour
                 if (!gameOver)
                 {
                     Debug.Log("Player Out of Lives");
+                    GameOver();
                     gameOver = true;
                 }
             }
