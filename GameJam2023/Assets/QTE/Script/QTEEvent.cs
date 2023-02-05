@@ -78,12 +78,11 @@ public class QTEEvent : MonoBehaviour
         eventButton.SetActive(true);
     }*/
 
-    public void SetTSValues(List<QTEKey> inputKeys, float eventDuration, Slider durationSlider)
+    public void SetTSValues(List<QTEKey> inputKeys, float eventDuration)
     {
         keys = inputKeys;
         time = eventDuration;
 
-        sequenceSlider = durationSlider;
         sequenceSlider.maxValue = time;
     }
 }

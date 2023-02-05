@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 #if UNITY_2019_4_OR_NEWER && ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 using DualShockGamepadPS4 = UnityEngine.InputSystem.DualShock.DualShock4GamepadHID;
@@ -108,10 +109,10 @@ public class QTEManager : MonoBehaviour
         isEventStarted = true;
         while (currentTime > 0 && isEventStarted && !isEnded)
         {
-            if (eventData.keyboardUI.eventTimerText != null)
+            /*if (eventData.keyboardUI.eventTimerText != null)
             {
                 eventData.keyboardUI.eventTimerText.text = currentTime.ToString();
-            }
+            }*/
             currentTime--;
             yield return new WaitWhile(() => isPaused);
             yield return new WaitForSecondsRealtime(1f);
