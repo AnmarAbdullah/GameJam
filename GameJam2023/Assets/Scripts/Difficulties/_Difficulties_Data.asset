@@ -267,7 +267,7 @@ MonoBehaviour:
     eventDuration: 15
   - sequenceCount: 8
     eventDuration: 10
-  pathCurve:
+  rotateCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -318,4 +318,14 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  PathDifficulty: []
+  RotateDifficulty:
+  - speed: 50
+    eventDuration: 30
+  - speed: 60
+    eventDuration: 25
+  - speed: 70
+    eventDuration: 20
+  - speed: 80
+    eventDuration: 15
+  - speed: 80
+    eventDuration: 10

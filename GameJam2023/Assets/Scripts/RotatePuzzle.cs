@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class RotatePuzzle : MonoBehaviour
 {
+    public List<GameObject> objectsToToggle;
+
     [SerializeField] GameObject Rotater;
     [SerializeField] Transform Goal;
     [SerializeField] bool eventStarted;
@@ -16,14 +18,19 @@ public class RotatePuzzle : MonoBehaviour
 
     [SerializeField] int amountOfSpawns;
     [SerializeField] Slider slider;
-    private void Start()
+
+    BodyEvent_Rotater ev;
+
+    private void Awake()
     {
-        Center.transform.rotation = Quaternion.Euler(Random.Range(1,360), 90, 0);
-        CreateElement();       
+        ev = GetComponent<BodyEvent_Rotater>();
     }
 
     public void StartEvent()
     {
+        for (int i = 0; i < objectsToToggle.Count; i++)
+            objectsToToggle[i].SetActive(true);
+
         eventStarted = true;
         slider.gameObject.SetActive(true);
         slider.maxValue = duration;
@@ -56,6 +63,7 @@ public class RotatePuzzle : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.Space))
                     {
                         // Activate Win Event
+                        ev.Completed();
                         eventStarted = false;
                     }
                 }
@@ -66,6 +74,7 @@ public class RotatePuzzle : MonoBehaviour
             {
                 Debug.Log("You Lost Dumboo");
                 // Activate loss event
+                ev.Failed();
                 eventStarted = false;
             }
         }
@@ -75,8 +84,22 @@ public class RotatePuzzle : MonoBehaviour
     {
         Vector3 spawnPos = (Center.transform.forward * 1f) + Center.transform.position;
         Transform gb = Instantiate(Goal, spawnPos,transform.rotation);
+        gb.SetParent(transform);
         gb.transform.LookAt(Center.transform.position);
+        objectsToToggle.Add(gb.gameObject);
         Vector3 dirFromAtoB = (Center.transform.position - Rotater.transform.position).normalized;
         float dotProd = Vector3.Dot(dirFromAtoB, transform.forward);
+    }
+
+    public void SetUp(int s, float dur)
+    {
+        Center.transform.rotation = Quaternion.Euler(Random.Range(1, 360), 90, 0);
+        //Rotater.SetActive(false);
+        speed = s;
+        duration = dur;
+        CreateElement();
+
+        for (int i = 0; i< objectsToToggle.Count; i++)
+            objectsToToggle[i].SetActive(false);
     }
 }

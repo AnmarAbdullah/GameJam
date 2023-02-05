@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 53713007}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.24, y: -0.09, z: 1.71}
+  m_LocalPosition: {x: -0.24, y: -0.09, z: 2.57}
   m_LocalScale: {x: 2.4599998, y: 2.4599998, z: 2.4599998}
   m_Children:
   - {fileID: 555990932}
@@ -582,6 +582,7 @@ MonoBehaviour:
   eventPrefabs:
   - {fileID: 2727438167127431292, guid: 11aeb85bf2f5f1b4482334e5b33479be, type: 3}
   - {fileID: 8495351311469418755, guid: dcd101ad98e7b38408d4a187fe450ea6, type: 3}
+  - {fileID: 3898014116307257316, guid: 649447a67f7292d47a2d13a6b3b8e855, type: 3}
   eventIntervalRange: {x: 5, y: 10}
   TimeToReachEvent: 90
   BodyAreas:
