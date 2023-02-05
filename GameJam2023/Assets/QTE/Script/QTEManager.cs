@@ -206,8 +206,10 @@ public class QTEManager : MonoBehaviour
 
             if (key.keyboardKey == keys[0].keyboardKey)
             {
-                Debug.Log(key.keyboardKey.ToString());      //For Debugging
+                Debug.Log($"{key.keyboardKey.ToString()} is the correct Input.");      //For Debugging
                 keys.Remove(key);
+                if (keys.Count > 0)
+                    Debug.Log($"Next input is {keys[0].keyboardKey}");
             }
             else
             {
