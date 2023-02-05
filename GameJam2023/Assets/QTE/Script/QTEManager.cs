@@ -28,6 +28,13 @@ public class QTEManager : MonoBehaviour
     private float rememberTimeScale;
     private List<QTEKey> keys = new List<QTEKey>();
 
+    int size = 4;
+
+    public void SetSize(int amount)
+    {
+        size = amount;
+    }
+
     protected void Update()
     {
         if (!isEventStarted || eventData == null || isPaused) return;
@@ -64,7 +71,7 @@ public class QTEManager : MonoBehaviour
 #else
         string seq = "";        //For Debugging
 
-        for (int i = 0; i < eventData.keys.Count; i++)
+        for (int i = 0; i < size; i++)
         {
             keys.Add(eventData.keys[Random.Range(0, eventData.keys.Count)]);
             seq += keys[i].keyboardKey.ToString();        //For Debugging   

@@ -14,6 +14,7 @@ public abstract class BodyEvent : MonoBehaviour
     float reachTimer;
     bool reachTime;
     public Slider timeSlider;
+    Animation anim;
 
     public GameObject IconRoot;
     public GameObject IconPrefab;
@@ -21,6 +22,11 @@ public abstract class BodyEvent : MonoBehaviour
     GameObject PanelRoot;
     [SerializeField] GameObject NotiPrefab;
     GameObject notification;
+
+
+    [SerializeField] Texture heartUI;
+    [SerializeField] Texture lungsUI;
+    [SerializeField] Texture StomachUI;
 
     // Start is called before the first frame update
     void Awake()
@@ -56,8 +62,8 @@ public abstract class BodyEvent : MonoBehaviour
         
         notification = Instantiate(NotiPrefab, PanelRoot.transform);
         notification.transform.parent = PanelRoot.transform;
-        notification.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"Location: {point.name}";
-        notification.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = $"Problem: You have cancer...";
+        notification.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"{point.name}";
+        notification.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = $"Signs Of Distress";
 
         Icon = Instantiate(IconPrefab, IconRoot.transform);
         Icon.GetComponent<EventIcon>().SetupIcon(this, timeToReach);
@@ -67,6 +73,26 @@ public abstract class BodyEvent : MonoBehaviour
         slider.maxValue = timeToReach;
         slider.value = timeToReach;
         timeSlider = slider;
+
+
+        RawImage target = notification.transform.GetChild(3).GetComponent<RawImage>();
+        
+        switch (point.name)
+        {
+            case "Heart":
+                target.texture = heartUI;
+            break;
+
+            case "Lungs":
+                target.texture = lungsUI;
+                break;
+
+            case "Stomach":
+                target.texture = StomachUI;
+                break;
+        }
+        
+        Animation anima = notification.GetComponentInChildren<Animation>();
 
         TimeToReachEvent = timeToReach;
         reachTimer = 0;
@@ -78,6 +104,7 @@ public abstract class BodyEvent : MonoBehaviour
     public virtual void StartEvent()
     {
         reachTime = false;
+        Icon.GetComponent<EventIcon>().EventStarted();
         Debug.Log("Player Started Event");
     }
 

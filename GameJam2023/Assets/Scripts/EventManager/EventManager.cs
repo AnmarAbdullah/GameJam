@@ -6,12 +6,13 @@ using TMPro;
 
 public class EventManager : MonoBehaviour
 {
+    public BodyEventDifficultyData data;
 
     public int lives;
     int PlayerLives;
+    int PlayerFullLives;
     bool gameOver;
-    public Slider LifeSlider;
-
+    public Image LifeSlider;
 
     public float GameDuration;
     public TMP_Text timerText;
@@ -36,8 +37,8 @@ public class EventManager : MonoBehaviour
     {
         activeEvents = new List<BodyEvent>();
         PlayerLives = lives;
-        LifeSlider.maxValue = lives;
-        LifeSlider.value = lives;
+        PlayerFullLives = lives;
+        LifeSlider.fillAmount = (float)PlayerLives / (float)PlayerFullLives;
 
         SetIntervalTime();
         //BodyAreas.AddRange(FindObjectsOfType<NavigationPoint>());
@@ -106,7 +107,10 @@ public class EventManager : MonoBehaviour
 
     void SetIntervalTime()
     {
-        intervalPeriod = Random.Range(eventIntervalRange.x, eventIntervalRange.y);
+        float DifficultyPercent = GameTimer / GameDuration;
+        int diffIndex = (int)data.intervalCurve.Evaluate(DifficultyPercent);
+
+        intervalPeriod = Random.Range(data.IntervalDifficulty[diffIndex].minInterval, data.IntervalDifficulty[diffIndex].maxInterval);
         intervalTimer = 0;
         runInterval = true;
     }
@@ -144,8 +148,11 @@ public class EventManager : MonoBehaviour
         BodyEvent instanceEvent = eventInstance.GetComponent<BodyEvent>();
 
         float DifficultyPercent = GameTimer / GameDuration;
+        int reachIndex = (int)data.intervalCurve.Evaluate(DifficultyPercent);
+        float reachTime = Random.Range(data.IntervalDifficulty[reachIndex].timeToReach.x, data.IntervalDifficulty[reachIndex].timeToReach.x);
 
-        instanceEvent.CreateEvent(this, eventPoint, TimeToReachEvent, DifficultyPercent);
+
+        instanceEvent.CreateEvent(this, eventPoint, reachTime, DifficultyPercent);
         activeEvents.Add(instanceEvent);
 
         Debug.Log("Event Created at: " + eventPoint.name);
@@ -166,7 +173,8 @@ public class EventManager : MonoBehaviour
     public void EventFailed(BodyEvent bodyEvent)
     {
         PlayerLives--;
-        LifeSlider.value = PlayerLives;
+        float amount = 0 + ((float)PlayerLives / (float)PlayerFullLives);
+        LifeSlider.fillAmount = amount;
         activeEvents.Remove(bodyEvent);
         // bodyEvent.GetComponentsInChildren<Animator>().SetBool("Done", true);
         Animator[] anim = bodyEvent.GetComponentsInChildren<Animator>();
