@@ -1,13 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class EventManager : MonoBehaviour
 {
+    public BodyEventDifficultyData data;
 
     public int lives;
     int PlayerLives;
+    int PlayerFullLives;
     bool gameOver;
+    public Image LifeSlider;
+
+    public float GameDuration;
+    public TMP_Text timerText;
+    float GameTimer;
+    bool gameComplete;
 
     public int maxEvents;
     List<BodyEvent> activeEvents;
@@ -27,6 +37,8 @@ public class EventManager : MonoBehaviour
     {
         activeEvents = new List<BodyEvent>();
         PlayerLives = lives;
+        PlayerFullLives = lives;
+        LifeSlider.fillAmount = (float)PlayerLives / (float)PlayerFullLives;
 
         SetIntervalTime();
         //BodyAreas.AddRange(FindObjectsOfType<NavigationPoint>());
@@ -42,33 +54,63 @@ public class EventManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerLives > 0)
+        if (GameTimer <= GameDuration)
         {
+            GameTimer += Time.deltaTime;
+            float remaining = GameDuration - GameTimer;
+            float min = Mathf.Floor(remaining / 60);
+            float sec = Mathf.RoundToInt(remaining % 60);
 
-            if (runInterval && activeEvents.Count <= maxEvents)
-            {
-                if (intervalTimer >= intervalPeriod)
-                {
-                    CreateEvent();
-                    SetIntervalTime();
-                }
-                else
-                    intervalTimer += Time.deltaTime;
-            }
+            string minutes = min.ToString();
+            string seconds = Mathf.RoundToInt(sec).ToString();
+            if (min < 10)
+                minutes = "0" + min.ToString();
+            if (sec < 10)
+                seconds = "0" + Mathf.RoundToInt(sec).ToString();
+
+            timerText.text = minutes + ":" + seconds;
         }
         else
         {
-            if (!gameOver)
+            gameComplete = true;
+            Debug.Log("You Beat The Game");
+        }
+
+        if (!gameComplete)
+        {
+
+            if (PlayerLives > 0)
             {
-                Debug.Log("Player Out of Lives");
-                gameOver = true;
+
+                if (runInterval && activeEvents.Count < maxEvents)
+                {
+                    if (intervalTimer >= intervalPeriod)
+                    {
+                        if (activeEvents.Count <= maxEvents)
+                            CreateEvent();
+                        SetIntervalTime();
+                    }
+                    else
+                        intervalTimer += Time.deltaTime;
+                }
+            }
+            else
+            {
+                if (!gameOver)
+                {
+                    Debug.Log("Player Out of Lives");
+                    gameOver = true;
+                }
             }
         }
     }
 
     void SetIntervalTime()
     {
-        intervalPeriod = Random.Range(eventIntervalRange.x, eventIntervalRange.y);
+        float DifficultyPercent = GameTimer / GameDuration;
+        int diffIndex = (int)data.intervalCurve.Evaluate(DifficultyPercent);
+
+        intervalPeriod = Random.Range(data.IntervalDifficulty[diffIndex].minInterval, data.IntervalDifficulty[diffIndex].maxInterval);
         intervalTimer = 0;
         runInterval = true;
     }
@@ -76,12 +118,41 @@ public class EventManager : MonoBehaviour
     void CreateEvent()
     {
         int type = Random.Range(0, eventPrefabs.Length);
-        NavigationPoint eventPoint = BodyAreas[Random.Range(0, BodyAreas.Count)];
+        //List<NavigationPoint> possiblePoints = BodyAreas;
+        //for (int i = activeEvents.Count - 1; i >= 0; i--)
+        //{
+        //    possiblePoints.Remove(activeEvents[i].eventPoint);
+        //}
+        List<NavigationPoint> possiblePoints = new List<NavigationPoint>();
+        for (int i = 0; i < BodyAreas.Count; i++)
+        {
+            bool canAdd = true;
+
+            for (int j = 0; j < activeEvents.Count; j++)
+            {
+                if (BodyAreas[i] == activeEvents[j].eventPoint)
+                {
+                    canAdd = false;
+                    break;
+                }
+            }
+
+            if (canAdd)
+                possiblePoints.Add(BodyAreas[i]);
+        }
+        NavigationPoint eventPoint = possiblePoints[Random.Range(0, possiblePoints.Count)];
+
+
 
         GameObject eventInstance = Instantiate(eventPrefabs[type], eventPoint.eventRoot.transform);
         BodyEvent instanceEvent = eventInstance.GetComponent<BodyEvent>();
 
-        instanceEvent.CreateEvent(this, eventPoint, TimeToReachEvent);
+        float DifficultyPercent = GameTimer / GameDuration;
+        int reachIndex = (int)data.intervalCurve.Evaluate(DifficultyPercent);
+        float reachTime = Random.Range(data.IntervalDifficulty[reachIndex].timeToReach.x, data.IntervalDifficulty[reachIndex].timeToReach.x);
+
+
+        instanceEvent.CreateEvent(this, eventPoint, reachTime, DifficultyPercent);
         activeEvents.Add(instanceEvent);
 
         Debug.Log("Event Created at: " + eventPoint.name);
@@ -90,13 +161,27 @@ public class EventManager : MonoBehaviour
     public void EventCompleted(BodyEvent bodyEvent)
     {
         activeEvents.Remove(bodyEvent);
-        Destroy(bodyEvent.gameObject);
+        //bodyEvent.GetComponentsInChildren<Animator>().SetBool("Done", true);
+        Animator[] anim = bodyEvent.GetComponentsInChildren<Animator>();
+        for (int i = 0; i < anim.Length; i++)
+        {
+            anim[i].SetBool("Done", true);
+        }
+        Destroy(bodyEvent.gameObject, 0.4f);
     }
 
     public void EventFailed(BodyEvent bodyEvent)
     {
         PlayerLives--;
+        float amount = 0 + ((float)PlayerLives / (float)PlayerFullLives);
+        LifeSlider.fillAmount = amount;
         activeEvents.Remove(bodyEvent);
-        Destroy(bodyEvent.gameObject);
+        // bodyEvent.GetComponentsInChildren<Animator>().SetBool("Done", true);
+        Animator[] anim = bodyEvent.GetComponentsInChildren<Animator>();
+        for (int i = 0; i < anim.Length; i++)
+        {
+            anim[i].SetBool("Done", true);
+        }
+        Destroy(bodyEvent.gameObject, 0.4f);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class ConnectDots : MonoBehaviour
 {
@@ -11,12 +12,14 @@ public class ConnectDots : MonoBehaviour
     public List<Transform> Planned = new List<Transform>();
     public Transform dotsToSpawn;
 
-    [SerializeField] int amountToSpawn;
-    [SerializeField] float Duration;
+    [SerializeField] public int amountToSpawn;
+    [SerializeField] public float Duration;
     bool eventStarted;
 
     public Transform lastPoints;
     public Transform indic;
+    public Slider slider;
+
 
     BodyEvents_Dots ev;
 
@@ -28,7 +31,7 @@ public class ConnectDots : MonoBehaviour
         //StartEvent();
     }
 
-    public void SetValues(int amount, int duration)
+    public void SetValues(int amount, float duration)
     {
         amountToSpawn = amount;
         Duration = duration;
@@ -42,20 +45,30 @@ public class ConnectDots : MonoBehaviour
 
     private void Spawn(int amount)
     {
+        StartCoroutine(Spawner(amount));
+        slider.gameObject.SetActive(true);
+        slider.maxValue = Duration;
+    }
+
+    IEnumerator Spawner(int amount)
+    {
         for (int i = 0; i < amount; i++)
         {
-            Vector2 pos = Random.insideUnitCircle * 2;
+            Vector2 pos = Random.insideUnitCircle * 4;
 
             Transform obj = Instantiate(dotsToSpawn, transform);
-            obj.position = pos;
+            obj.position = transform.position + new Vector3(pos.x, pos.y, 0);
             Planned.Add(obj);
+            int e = i + 1;
+            obj.GetComponentInChildren<TextMeshProUGUI>().text = e.ToString();
+            yield return new WaitForSeconds(0.4f);
         }
 
-        for (int i = 0; i < Planned.Count; i++)
+        /*for (int i = 0; i < Planned.Count; i++)
         {
             int e = i + 1;
             Planned[i].GetComponentInChildren<TextMesh>().text = e.ToString();
-        }
+        }*/
     }
 
     void makeLine(Transform finalpoint)
@@ -88,11 +101,14 @@ public class ConnectDots : MonoBehaviour
         if (eventStarted)
         {
             Duration -= Time.deltaTime;
+            slider.value = Duration;
             if (Duration <= 0)
             {
                 // Activate Loss Condition
                 Debug.Log("loss");
+                lr.enabled=false;
                 ev.Failed();
+                // play sound effect of fail
                 eventStarted = false;
             }
 
@@ -104,7 +120,10 @@ public class ConnectDots : MonoBehaviour
                     {
                         // Activate Loss Condition
                         Debug.Log("loss");
+                        lr.enabled = false;
                         ev.Failed();
+                        // play sound effect of fail
+                        eventStarted = false;
                     }
                 }
             }
@@ -112,7 +131,9 @@ public class ConnectDots : MonoBehaviour
             if (points.Count == Planned.Count)
             {
                 //activate win condition
+                lr.enabled = false;
                 print("win");
+                //play sound effect of win
                 ev.Completed();
                 eventStarted = false;
             }
@@ -127,6 +148,7 @@ public class ConnectDots : MonoBehaviour
                     makeLine(hit.collider.transform);
                     indic.position = hit.collider.transform.position;
                     print(hit.collider.name);
+                    // play sound effect of dot clicking
                     if (hit.collider != null) { }
                 }
             }

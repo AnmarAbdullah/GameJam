@@ -4,9 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - MousePoint
-  - MazePath
-  - MazeFail
+  - Panel
+  - IconRoot
+  - Panel
+  - IconRoot
   layers:
   - Default
   - TransparentFX
