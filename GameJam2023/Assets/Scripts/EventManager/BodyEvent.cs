@@ -28,7 +28,7 @@ public abstract class BodyEvent : MonoBehaviour
     [SerializeField] Texture lungsUI;
     [SerializeField] Texture StomachUI;
     [SerializeField] Texture LiverUI;
-    [SerializeField] Texture KidneysUI;
+    [SerializeField] Texture KidneysUI ;
 
     // Start is called before the first frame update
     void Awake()
@@ -81,7 +81,7 @@ public abstract class BodyEvent : MonoBehaviour
         timeSlider = slider;
 
 
-        RawImage target = notification.transform.GetChild(3).GetComponent<RawImage>();
+        /*RawImage target = notification.transform.GetChild(3).GetComponent<RawImage>();
         
         switch (point.name)
         {
@@ -102,7 +102,7 @@ public abstract class BodyEvent : MonoBehaviour
             case "Liver":
                 target.texture = StomachUI;
                 break;
-        }
+        }*/
         
         Animation anima = notification.GetComponentInChildren<Animation>();
         anim = anima;
