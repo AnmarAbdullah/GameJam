@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RotatePuzzle : MonoBehaviour
 {
@@ -9,23 +10,30 @@ public class RotatePuzzle : MonoBehaviour
     [SerializeField] bool eventStarted;
     [SerializeField] bool onGoal;
     [SerializeField] int speed;
-
+    [SerializeField] private Transform arrow; 
     [SerializeField] float duration;
 
     [SerializeField] int amountOfSpawns;
+    [SerializeField] Slider slider;
     private void Start()
     {
         transform.rotation = Quaternion.Euler(Random.Range(1,360), 90, 0);
-        CreateElement();
-        
+        CreateElement();       
     }
 
+    public void StartEvent()
+    {
+        eventStarted = true;
+        slider.gameObject.SetActive(true);
+        slider.maxValue = duration;
+    }
 
     private void Update()
     {
         if (eventStarted)
         {
             duration -= Time.deltaTime;
+            slider.value = duration;
             if(duration <= 0)
             {
                 // Activate Loss Event
@@ -35,10 +43,10 @@ public class RotatePuzzle : MonoBehaviour
 
 
             Vector3 dirFromAtoB = (transform.position - Rotater.transform.position).normalized;
-            float dotProd = Vector3.Dot(dirFromAtoB, transform.forward);
-            // print(dotProd);
+            float dotProd = Vector3.Dot(arrow.up, transform.forward);
 
-            if (dotProd < -0.9)
+            Debug.Log(dotProd);
+            if (dotProd >0.97f)
             {
                 Debug.Log("On Goal");
                 onGoal = true;
@@ -65,7 +73,8 @@ public class RotatePuzzle : MonoBehaviour
     void CreateElement()
     {
         Vector3 spawnPos = (transform.forward * 1f) + transform.position;
-        Transform gb = Instantiate(Goal, spawnPos, Quaternion.identity);
+        Transform gb = Instantiate(Goal, spawnPos,transform.rotation);
+        gb.transform.LookAt(transform.position);
         Vector3 dirFromAtoB = (transform.position - Rotater.transform.position).normalized;
         float dotProd = Vector3.Dot(dirFromAtoB, transform.forward);
     }
