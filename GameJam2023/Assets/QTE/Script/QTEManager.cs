@@ -212,7 +212,7 @@ public class QTEManager : MonoBehaviour
             else
             {
                 isFail = true;
-                Debug.Log("Incorrect Input");      //For Debugging
+                Debug.Log($"{key.keyboardKey.ToString()} Incorrect Input. The correct input is: {keys[0].keyboardKey.ToString()}");      //For Debugging
             }
         }
         if (Input.GetKeyUp(key.keyboardKey) && eventData.pressType == QTEPressType.Simultaneously)
