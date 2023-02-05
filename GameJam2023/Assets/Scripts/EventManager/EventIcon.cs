@@ -8,6 +8,7 @@ public class EventIcon : MonoBehaviour
 {
     Image icon;
 
+    public Color startedColor;
     public AnimationCurve flashCurve;
     public AnimationCurve SpeedCurve;
     public Color flashColor;
@@ -23,12 +24,6 @@ public class EventIcon : MonoBehaviour
     float timer;
 
     bool runIcon;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     public void SetupIcon(BodyEvent Event, float reachTime)
     {
@@ -74,5 +69,11 @@ public class EventIcon : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void EventStarted()
+    {
+        runIcon = false;
+        icon.color = startedColor;
     }
 }
