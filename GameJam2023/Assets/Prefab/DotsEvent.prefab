@@ -323,6 +323,9 @@ MonoBehaviour:
   IconRoot: {fileID: 0}
   IconPrefab: {fileID: 5982157463999560140, guid: 417874630d1b336458bee173697a86df, type: 3}
   NotiPrefab: {fileID: 1365517833701255112, guid: e5133a600d3d38b47a2c15b496dc28cc, type: 3}
+  heartUI: {fileID: 2800000, guid: a10ba7cc7ac0b3645827389b8a7aaf47, type: 3}
+  lungsUI: {fileID: 2800000, guid: 6d3881d300ea9a042ae20e58a2231aca, type: 3}
+  StomachUI: {fileID: 2800000, guid: e2b50bc2ac5ff4848b1d0d04a2adc91b, type: 3}
   amount: 3
   duration: 120
 --- !u!1 &5683702586428763833
