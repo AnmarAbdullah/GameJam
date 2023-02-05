@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class EventManager : MonoBehaviour
 {
@@ -8,6 +10,13 @@ public class EventManager : MonoBehaviour
     public int lives;
     int PlayerLives;
     bool gameOver;
+    public Slider LifeSlider;
+
+
+    public float GameDuration;
+    public TMP_Text timerText;
+    float GameTimer;
+    bool gameComplete;
 
     public int maxEvents;
     List<BodyEvent> activeEvents;
@@ -27,6 +36,8 @@ public class EventManager : MonoBehaviour
     {
         activeEvents = new List<BodyEvent>();
         PlayerLives = lives;
+        LifeSlider.maxValue = lives;
+        LifeSlider.value = lives;
 
         SetIntervalTime();
         //BodyAreas.AddRange(FindObjectsOfType<NavigationPoint>());
@@ -42,27 +53,53 @@ public class EventManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerLives > 0)
+        if (GameTimer <= GameDuration)
         {
+            GameTimer += Time.deltaTime;
+            float remaining = GameDuration - GameTimer;
+            float min = Mathf.Floor(remaining / 60);
+            float sec = Mathf.RoundToInt(remaining % 60);
 
-            if (runInterval && activeEvents.Count < maxEvents)
-            {
-                if (intervalTimer >= intervalPeriod)
-                {
-                    if (activeEvents.Count <= maxEvents)
-                        CreateEvent();
-                    SetIntervalTime();
-                }
-                else
-                    intervalTimer += Time.deltaTime;
-            }
+            string minutes = min.ToString();
+            string seconds = Mathf.RoundToInt(sec).ToString();
+            if (min < 10)
+                minutes = "0" + min.ToString();
+            if (sec < 10)
+                seconds = "0" + Mathf.RoundToInt(sec).ToString();
+
+            timerText.text = minutes + ":" + seconds;
         }
         else
         {
-            if (!gameOver)
+            gameComplete = true;
+            Debug.Log("You Beat The Game");
+        }
+
+        if (!gameComplete)
+        {
+
+            if (PlayerLives > 0)
             {
-                Debug.Log("Player Out of Lives");
-                gameOver = true;
+
+                if (runInterval && activeEvents.Count < maxEvents)
+                {
+                    if (intervalTimer >= intervalPeriod)
+                    {
+                        if (activeEvents.Count <= maxEvents)
+                            CreateEvent();
+                        SetIntervalTime();
+                    }
+                    else
+                        intervalTimer += Time.deltaTime;
+                }
+            }
+            else
+            {
+                if (!gameOver)
+                {
+                    Debug.Log("Player Out of Lives");
+                    gameOver = true;
+                }
             }
         }
     }
@@ -77,19 +114,38 @@ public class EventManager : MonoBehaviour
     void CreateEvent()
     {
         int type = Random.Range(0, eventPrefabs.Length);
-        List<NavigationPoint> possiblePoints = BodyAreas;
-        for (int i = 0; i < activeEvents.Count; i++)
+        //List<NavigationPoint> possiblePoints = BodyAreas;
+        //for (int i = activeEvents.Count - 1; i >= 0; i--)
+        //{
+        //    possiblePoints.Remove(activeEvents[i].eventPoint);
+        //}
+        List<NavigationPoint> possiblePoints = new List<NavigationPoint>();
+        for (int i = 0; i < BodyAreas.Count; i++)
         {
-            possiblePoints.Remove(activeEvents[i].eventPoint);
-        }
-        NavigationPoint eventPoint = possiblePoints[Random.Range(0, BodyAreas.Count)];
+            bool canAdd = true;
 
-        
+            for (int j = 0; j < activeEvents.Count; j++)
+            {
+                if (BodyAreas[i] == activeEvents[j].eventPoint)
+                {
+                    canAdd = false;
+                    break;
+                }
+            }
+
+            if (canAdd)
+                possiblePoints.Add(BodyAreas[i]);
+        }
+        NavigationPoint eventPoint = possiblePoints[Random.Range(0, possiblePoints.Count)];
+
+
 
         GameObject eventInstance = Instantiate(eventPrefabs[type], eventPoint.eventRoot.transform);
         BodyEvent instanceEvent = eventInstance.GetComponent<BodyEvent>();
 
-        instanceEvent.CreateEvent(this, eventPoint, TimeToReachEvent);
+        float DifficultyPercent = GameTimer / GameDuration;
+
+        instanceEvent.CreateEvent(this, eventPoint, TimeToReachEvent, DifficultyPercent);
         activeEvents.Add(instanceEvent);
 
         Debug.Log("Event Created at: " + eventPoint.name);
@@ -104,14 +160,15 @@ public class EventManager : MonoBehaviour
         {
             anim[i].SetBool("Done", true);
         }
-        Destroy(bodyEvent.gameObject,0.4f);
+        Destroy(bodyEvent.gameObject, 0.4f);
     }
 
     public void EventFailed(BodyEvent bodyEvent)
     {
         PlayerLives--;
+        LifeSlider.value = PlayerLives;
         activeEvents.Remove(bodyEvent);
-       // bodyEvent.GetComponentsInChildren<Animator>().SetBool("Done", true);
+        // bodyEvent.GetComponentsInChildren<Animator>().SetBool("Done", true);
         Animator[] anim = bodyEvent.GetComponentsInChildren<Animator>();
         for (int i = 0; i < anim.Length; i++)
         {

@@ -11,14 +11,21 @@ public class BodyEvent_TypeSequence : BodyEvent
 
     public float eventTimer;
 
-    public override void CreateEvent(EventManager eManager, NavigationPoint point, float timeToReach)
+    public override void CreateEvent(EventManager eManager, NavigationPoint point, float timeToReach, float diffPrecent)
     {
-        base.CreateEvent(eManager, point, timeToReach);
+        base.CreateEvent(eManager, point, timeToReach, diffPrecent);
+
+        int diffIndex = (int)data.sequenceCurve.Evaluate(diffPrecent);
+
 
         typeSeqManager = GetComponent<QTEManager>();
         typeSeqEvent = typeSeqManager.eventData;
 
-        typeSeqEvent.SetTSValues(sequenceKeys, eventTimer);
+        List<QTEKey> keys = new List<QTEKey>();
+        for (int i = 0; i < data.SequenceDifficulty[diffIndex].sequenceCount; i++)
+            keys.Add(data.possibleKeys[Random.Range(0, data.possibleKeys.Count)]);
+
+        typeSeqEvent.SetTSValues(keys, data.SequenceDifficulty[diffIndex].eventDuration);
     }
 
     public override void StartEvent()
