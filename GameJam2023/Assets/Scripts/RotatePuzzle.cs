@@ -19,6 +19,9 @@ public class RotatePuzzle : MonoBehaviour
     [SerializeField] int amountOfSpawns;
     [SerializeField] Slider slider;
 
+   [SerializeField] AudioSource Success;
+   [SerializeField] AudioSource Failed;
+
     BodyEvent_Rotater ev;
 
     private void Awake()
@@ -51,6 +54,7 @@ public class RotatePuzzle : MonoBehaviour
             if(Duration <= 0)
             {
                 // Activate Loss Event
+                Failed.Play();
                 eventStarted = false;
             }
             Rotater.transform.RotateAround(Center.transform.position, Vector3.back, Speed * Time.deltaTime);
@@ -66,9 +70,10 @@ public class RotatePuzzle : MonoBehaviour
                 onGoal = true;
                 if (onGoal)
                 {
-                    if (Input.GetKeyDown(KeyCode.Space))
+                    if (Input.GetMouseButtonDown(0))
                     {
                         // Activate Win Event
+                        Success.Play();
                         ev.Completed();
                         eventStarted = false;
                     }
@@ -80,6 +85,7 @@ public class RotatePuzzle : MonoBehaviour
             {
                 Debug.Log("You Lost Dumboo");
                 // Activate loss event
+                Failed.Play();
                 ev.Failed();
                 eventStarted = false;
             }
@@ -101,8 +107,8 @@ public class RotatePuzzle : MonoBehaviour
     {
         Center.transform.rotation = Quaternion.Euler(Random.Range(1, 360), 90, 0);
         //Rotater.SetActive(false);
-        speed = s;
-        duration = dur;
+        Speed = s;
+        Duration = dur;
         CreateElement();
 
         for (int i = 0; i< objectsToToggle.Count; i++)

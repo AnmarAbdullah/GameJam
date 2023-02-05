@@ -20,6 +20,10 @@ public class ConnectDots : MonoBehaviour
     public Transform indic;
     public Slider slider;
 
+    AudioSource audio;
+   [SerializeField] AudioSource Success;
+   [SerializeField] AudioSource Failed;
+
 
     BodyEvents_Dots ev;
 
@@ -27,6 +31,7 @@ public class ConnectDots : MonoBehaviour
     {
         lr = GetComponent<LineRenderer>();
         ev = GetComponent<BodyEvents_Dots>();
+        audio = GetComponent<AudioSource>();
         //Spawn(amountToSpawn);
         //StartEvent();
     }
@@ -108,7 +113,7 @@ public class ConnectDots : MonoBehaviour
                 Debug.Log("loss");
                 lr.enabled=false;
                 ev.Failed();
-                // play sound effect of fail
+                Failed.Play();
                 eventStarted = false;
             }
 
@@ -120,6 +125,7 @@ public class ConnectDots : MonoBehaviour
                     {
                         // Activate Loss Condition
                         Debug.Log("loss");
+                        Failed.Play();
                         lr.enabled = false;
                         ev.Failed();
                         // play sound effect of fail
@@ -131,6 +137,7 @@ public class ConnectDots : MonoBehaviour
             if (points.Count == Planned.Count)
             {
                 //activate win condition
+                Success.Play();
                 lr.enabled = false;
                 print("win");
                 //play sound effect of win
@@ -145,6 +152,7 @@ public class ConnectDots : MonoBehaviour
                 print("Mouse Clicked");
                 if (Physics.Raycast(ray, out hit, 100))
                 {
+                    audio.Play();
                     makeLine(hit.collider.transform);
                     indic.position = hit.collider.transform.position;
                     print(hit.collider.name);

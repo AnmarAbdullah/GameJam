@@ -9,10 +9,12 @@ public class NavAimPoint : MonoBehaviour
     Navigation navControl;
     LookAtConstraint lookAt;
     NavigationPoint connectedPoint;
+    AudioSource audio;
 
     private void Awake()
     {
         navControl = FindObjectOfType<Navigation>();
+        audio = GetComponent<AudioSource>();
     }
 
     public void AimAtPoint(NavigationPoint point)
@@ -30,5 +32,6 @@ public class NavAimPoint : MonoBehaviour
     public void SelectPoint()
     {
         navControl.SetPosition(connectedPoint);
+        audio.Play();
     }
 }
