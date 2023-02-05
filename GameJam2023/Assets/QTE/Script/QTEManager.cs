@@ -284,18 +284,14 @@ public class QTEManager : MonoBehaviour
         {
             ui.eventTimerImage.fillAmount = 1;
         }
-        if (ui.eventTexts != null)
+        if (ui.eventText != null)
         {
-            for (int i = 0; i < keys.Count; i++)
-            {
+            ui.eventText.text = "";
+            //eventData.keys.ForEach(key => ui.eventText.text += key.keyboardKey + "+");
+            
+            keys.ForEach(key => ui.eventText.text += key.keyboardKey + " ");
 
-
-                ui.eventTexts[i].text = "";
-                //eventData.keys.ForEach(key => ui.eventText.text += key.keyboardKey + "+");
-
-                /*keys.ForEach(key => */ ui.eventTexts[i].text += keys[i].keyboardKey;
-                eventData.keyboardUI.eventTexts[i].text = ui.eventTexts[i].text.Remove(ui.eventTexts[i].text.Length - 1);
-            }
+            eventData.keyboardUI.eventText.text = ui.eventText.text.Remove(ui.eventText.text.Length - 1);
         }
         if (ui.eventUI != null)
         {
