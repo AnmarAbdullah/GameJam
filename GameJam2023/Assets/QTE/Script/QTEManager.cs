@@ -130,7 +130,7 @@ public class QTEManager : MonoBehaviour
         {
             ui.eventUI.SetActive(false);
         }
-        
+
         //Should call events
         if (eventData.onFail != null && isFail)
         {
@@ -284,13 +284,18 @@ public class QTEManager : MonoBehaviour
         {
             ui.eventTimerImage.fillAmount = 1;
         }
-        if (ui.eventText != null)
+        if (ui.eventTexts != null)
         {
-            ui.eventText.text = "";
-            //eventData.keys.ForEach(key => ui.eventText.text += key.keyboardKey + "+");
+            for (int i = 0; i < keys.Count; i++)
+            {
 
-            keys.ForEach(key => ui.eventText.text += key.keyboardKey + " ");
-            eventData.keyboardUI.eventText.text = ui.eventText.text.Remove(ui.eventText.text.Length - 1);
+
+                ui.eventTexts[i].text = "";
+                //eventData.keys.ForEach(key => ui.eventText.text += key.keyboardKey + "+");
+
+                /*keys.ForEach(key => */ ui.eventTexts[i].text += keys[i].keyboardKey;
+                eventData.keyboardUI.eventTexts[i].text = ui.eventTexts[i].text.Remove(ui.eventTexts[i].text.Length - 1);
+            }
         }
         if (ui.eventUI != null)
         {

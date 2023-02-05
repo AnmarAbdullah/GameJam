@@ -41,7 +41,7 @@ public class QTEKey
 public class QTEUI
 {
     public GameObject eventUI;
-    public TextMeshProUGUI eventText;
+    public TextMeshProUGUI[] eventTexts;
     public Text eventTimerText;
     public Image eventTimerImage;
 }
