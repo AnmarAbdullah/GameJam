@@ -9,9 +9,9 @@ public class RotatePuzzle : MonoBehaviour
     [SerializeField] Transform Goal;
     [SerializeField] bool eventStarted;
     [SerializeField] bool onGoal;
-    [SerializeField] int speed;
+    [SerializeField] float Speed;
     [SerializeField] private Transform arrow; 
-    [SerializeField] float duration;
+    [SerializeField] float Duration;
     [SerializeField] GameObject Center;
 
     [SerializeField] int amountOfSpawns;
@@ -22,25 +22,31 @@ public class RotatePuzzle : MonoBehaviour
         CreateElement();       
     }
 
+    public void setValues(float duration, float speed)
+    {
+        Speed = speed;
+        Duration = duration;
+    }
+
     public void StartEvent()
     {
         eventStarted = true;
         slider.gameObject.SetActive(true);
-        slider.maxValue = duration;
+        slider.maxValue = Duration;
     }
 
     private void Update()
     {
         if (eventStarted)
         {
-            duration -= Time.deltaTime;
-            slider.value = duration;
-            if(duration <= 0)
+            Duration -= Time.deltaTime;
+            slider.value = Duration;
+            if(Duration <= 0)
             {
                 // Activate Loss Event
                 eventStarted = false;
             }
-            Rotater.transform.RotateAround(Center.transform.position, Vector3.back, speed * Time.deltaTime);
+            Rotater.transform.RotateAround(Center.transform.position, Vector3.back, Speed * Time.deltaTime);
 
 
             Vector3 dirFromAtoB = (Center.transform.position - Rotater.transform.position).normalized;
