@@ -580,7 +580,6 @@ MonoBehaviour:
   timerText: {fileID: 1563995347}
   maxEvents: 3
   eventPrefabs:
-  - {fileID: 2727438167127431292, guid: 11aeb85bf2f5f1b4482334e5b33479be, type: 3}
   - {fileID: 8495351311469418755, guid: dcd101ad98e7b38408d4a187fe450ea6, type: 3}
   eventIntervalRange: {x: 5, y: 10}
   TimeToReachEvent: 90

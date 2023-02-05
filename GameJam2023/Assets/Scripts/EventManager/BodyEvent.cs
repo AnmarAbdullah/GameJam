@@ -92,7 +92,7 @@ public abstract class BodyEvent : MonoBehaviour
                 break;
         }
         
-        Animation anima = notification.transform.GetChild(5).GetComponent<Animation>();
+        Animation anima = notification.GetComponentInChildren<Animation>();
 
         TimeToReachEvent = timeToReach;
         reachTimer = 0;
