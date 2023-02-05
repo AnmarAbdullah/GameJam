@@ -171,7 +171,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 171b987145c03e14f9df9e95e49f1880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 0}
   lives: 3
+  LifeSlider: {fileID: 0}
+  GameDuration: 0
+  timerText: {fileID: 0}
   maxEvents: 2
   eventPrefabs:
   - {fileID: 8495351311469418755, guid: dcd101ad98e7b38408d4a187fe450ea6, type: 3}
@@ -1275,6 +1279,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e2c68b4a65658546875b290eb092d86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &5037802907397433589
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3030476923705352730, guid: ad8a5305018e6ea4f98b1635c1096dbc, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3030476923705352730, guid: ad8a5305018e6ea4f98b1635c1096dbc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3030476923705352730, guid: ad8a5305018e6ea4f98b1635c1096dbc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3030476923705352730, guid: ad8a5305018e6ea4f98b1635c1096dbc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3030476923705352730, guid: ad8a5305018e6ea4f98b1635c1096dbc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3030476923705352730, guid: ad8a5305018e6ea4f98b1635c1096dbc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3030476923705352730, guid: ad8a5305018e6ea4f98b1635c1096dbc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3030476923705352730, guid: ad8a5305018e6ea4f98b1635c1096dbc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3030476923705352730, guid: ad8a5305018e6ea4f98b1635c1096dbc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3030476923705352730, guid: ad8a5305018e6ea4f98b1635c1096dbc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3030476923705352730, guid: ad8a5305018e6ea4f98b1635c1096dbc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6120214115646338653, guid: ad8a5305018e6ea4f98b1635c1096dbc, type: 3}
+      propertyPath: m_Name
+      value: Bubble System
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ad8a5305018e6ea4f98b1635c1096dbc, type: 3}
 --- !u!1001 &8276262136602946900
 PrefabInstance:
   m_ObjectHideFlags: 0
