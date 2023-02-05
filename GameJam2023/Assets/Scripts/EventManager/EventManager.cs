@@ -31,6 +31,9 @@ public class EventManager : MonoBehaviour
     public float TimeToReachEvent;
 
     public List<NavigationPoint> BodyAreas;
+    public GameObject gameRoot;
+    public GameObject CompleteScreen;
+    public GameObject GameOverScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -76,7 +79,7 @@ public class EventManager : MonoBehaviour
             Debug.Log("You Beat The Game");
         }
 
-        if (!gameComplete)
+        if (!gameComplete || !gameOver)
         {
 
             if (PlayerLives > 0)
@@ -103,6 +106,19 @@ public class EventManager : MonoBehaviour
                 }
             }
         }
+
+    }
+
+    public void GameComplete()
+    {
+        CompleteScreen.SetActive(true);
+        gameRoot.SetActive(false);
+    }
+
+    public void GameOver()
+    {
+        GameOverScreen.SetActive(true);
+        gameRoot.SetActive(false);
     }
 
     void SetIntervalTime()

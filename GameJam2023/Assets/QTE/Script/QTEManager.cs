@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 #if UNITY_2019_4_OR_NEWER && ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 using DualShockGamepadPS4 = UnityEngine.InputSystem.DualShock.DualShock4GamepadHID;
@@ -14,6 +15,7 @@ public class QTEManager : MonoBehaviour
 {
     [Header("Configuration")]
     public float slowMotionTimeScale = 0.1f;
+    public float currentTime;
     public QTEEvent eventData;
 
     [HideInInspector]
@@ -23,7 +25,6 @@ public class QTEManager : MonoBehaviour
     private bool isEnded;
     private bool isPaused;
     private bool wrongKeyPressed;
-    private float currentTime;
     private float smoothTimeUpdate;
     private float rememberTimeScale;
     private List<QTEKey> keys = new List<QTEKey>();
@@ -108,10 +109,10 @@ public class QTEManager : MonoBehaviour
         isEventStarted = true;
         while (currentTime > 0 && isEventStarted && !isEnded)
         {
-            if (eventData.keyboardUI.eventTimerText != null)
+            /*if (eventData.keyboardUI.eventTimerText != null)
             {
                 eventData.keyboardUI.eventTimerText.text = currentTime.ToString();
-            }
+            }*/
             currentTime--;
             yield return new WaitWhile(() => isPaused);
             yield return new WaitForSecondsRealtime(1f);
@@ -172,11 +173,14 @@ public class QTEManager : MonoBehaviour
     protected void updateTimer()
     {
         smoothTimeUpdate -= Time.unscaledDeltaTime;
-        var ui = getUI();
+
+        eventData.sequenceSlider.value = smoothTimeUpdate;
+
+        /*var ui = getUI();
         if (ui.eventTimerImage != null)
         {
             ui.eventTimerImage.fillAmount = smoothTimeUpdate / eventData.time;
-        }
+        }*/
     }
 
     public void pause()
@@ -213,8 +217,10 @@ public class QTEManager : MonoBehaviour
 
             if (key.keyboardKey == keys[0].keyboardKey)
             {
-                Debug.Log(key.keyboardKey.ToString());      //For Debugging
+                Debug.Log($"{key.keyboardKey.ToString()} is the correct Input.");      //For Debugging
                 keys.Remove(key);
+                if (keys.Count > 0)
+                    Debug.Log($"Next input is {keys[0].keyboardKey}");
             }
             else
             {
@@ -287,10 +293,10 @@ public class QTEManager : MonoBehaviour
     {
         var ui = getUI();
 
-        if (ui.eventTimerImage != null)
+        /*if (ui.eventTimerImage != null)
         {
             ui.eventTimerImage.fillAmount = 1;
-        }
+        }*/
         if (ui.eventText != null)
         {
             ui.eventText.text = "";
