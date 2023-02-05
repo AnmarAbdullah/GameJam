@@ -12,12 +12,13 @@ public class RotatePuzzle : MonoBehaviour
     [SerializeField] int speed;
     [SerializeField] private Transform arrow; 
     [SerializeField] float duration;
+    [SerializeField] GameObject Center;
 
     [SerializeField] int amountOfSpawns;
     [SerializeField] Slider slider;
     private void Start()
     {
-        transform.rotation = Quaternion.Euler(Random.Range(1,360), 90, 0);
+        Center.transform.rotation = Quaternion.Euler(Random.Range(1,360), 90, 0);
         CreateElement();       
     }
 
@@ -39,11 +40,11 @@ public class RotatePuzzle : MonoBehaviour
                 // Activate Loss Event
                 eventStarted = false;
             }
-            Rotater.transform.RotateAround(transform.position, Vector3.back, speed * Time.deltaTime);
+            Rotater.transform.RotateAround(Center.transform.position, Vector3.back, speed * Time.deltaTime);
 
 
-            Vector3 dirFromAtoB = (transform.position - Rotater.transform.position).normalized;
-            float dotProd = Vector3.Dot(arrow.up, transform.forward);
+            Vector3 dirFromAtoB = (Center.transform.position - Rotater.transform.position).normalized;
+            float dotProd = Vector3.Dot(arrow.up, Center.transform.forward);
 
             Debug.Log(dotProd);
             if (dotProd >0.97f)
@@ -72,10 +73,10 @@ public class RotatePuzzle : MonoBehaviour
 
     void CreateElement()
     {
-        Vector3 spawnPos = (transform.forward * 1f) + transform.position;
+        Vector3 spawnPos = (Center.transform.forward * 1f) + Center.transform.position;
         Transform gb = Instantiate(Goal, spawnPos,transform.rotation);
-        gb.transform.LookAt(transform.position);
-        Vector3 dirFromAtoB = (transform.position - Rotater.transform.position).normalized;
+        gb.transform.LookAt(Center.transform.position);
+        Vector3 dirFromAtoB = (Center.transform.position - Rotater.transform.position).normalized;
         float dotProd = Vector3.Dot(dirFromAtoB, transform.forward);
     }
 }
