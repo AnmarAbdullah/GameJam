@@ -14,6 +14,7 @@ public class QTEManager : MonoBehaviour
 {
     [Header("Configuration")]
     public float slowMotionTimeScale = 0.1f;
+    public float currentTime;
     public QTEEvent eventData;
 
     [HideInInspector]
@@ -23,7 +24,6 @@ public class QTEManager : MonoBehaviour
     private bool isEnded;
     private bool isPaused;
     private bool wrongKeyPressed;
-    private float currentTime;
     private float smoothTimeUpdate;
     private float rememberTimeScale;
     private List<QTEKey> keys = new List<QTEKey>();
@@ -172,11 +172,14 @@ public class QTEManager : MonoBehaviour
     protected void updateTimer()
     {
         smoothTimeUpdate -= Time.unscaledDeltaTime;
-        var ui = getUI();
+
+        eventData.sequenceSlider.value = smoothTimeUpdate;
+
+        /*var ui = getUI();
         if (ui.eventTimerImage != null)
         {
             ui.eventTimerImage.fillAmount = smoothTimeUpdate / eventData.time;
-        }
+        }*/
     }
 
     public void pause()
@@ -289,10 +292,10 @@ public class QTEManager : MonoBehaviour
     {
         var ui = getUI();
 
-        if (ui.eventTimerImage != null)
+        /*if (ui.eventTimerImage != null)
         {
             ui.eventTimerImage.fillAmount = 1;
-        }
+        }*/
         if (ui.eventText != null)
         {
             ui.eventText.text = "";

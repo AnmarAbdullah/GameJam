@@ -18,6 +18,7 @@ public class ConnectDots : MonoBehaviour
 
     public Transform lastPoints;
     public Transform indic;
+    public Slider slider;
 
 
     BodyEvents_Dots ev;
@@ -45,6 +46,8 @@ public class ConnectDots : MonoBehaviour
     private void Spawn(int amount)
     {
         StartCoroutine(Spawner(amount));
+        slider.gameObject.SetActive(true);
+        slider.maxValue = Duration;
     }
 
     IEnumerator Spawner(int amount)
@@ -98,6 +101,7 @@ public class ConnectDots : MonoBehaviour
         if (eventStarted)
         {
             Duration -= Time.deltaTime;
+            slider.value = Duration;
             if (Duration <= 0)
             {
                 // Activate Loss Condition
