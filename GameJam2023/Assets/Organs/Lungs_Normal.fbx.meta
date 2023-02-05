@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ff92b8f1ab755694b8398f636d30ea00
+guid: 0ac89141de2eaae4297626a06556da59
 ModelImporter:
   serializedVersion: 20300
   internalIDToNameTable: []
@@ -36,7 +36,7 @@ ModelImporter:
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 0
-      lastFrame: 75
+      lastFrame: 160
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -94,7 +94,7 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 30
+    normalSmoothAngle: 16
     normalImportMode: 1
     tangentImportMode: 3
     normalCalculationMode: 4

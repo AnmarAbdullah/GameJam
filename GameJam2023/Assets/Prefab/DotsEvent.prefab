@@ -318,7 +318,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b9b8ca6a557e84d9433b773d215b64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 34ff7547b8cd6454e82dc31fbb0d33d8, type: 2}
   timeSlider: {fileID: 0}
+  IconRoot: {fileID: 0}
+  IconPrefab: {fileID: 5982157463999560140, guid: 417874630d1b336458bee173697a86df, type: 3}
   NotiPrefab: {fileID: 1365517833701255112, guid: e5133a600d3d38b47a2c15b496dc28cc, type: 3}
   amount: 3
   duration: 120

@@ -692,6 +692,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72515d5145c64e6469d1ba15197cce52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 34ff7547b8cd6454e82dc31fbb0d33d8, type: 2}
+  timeSlider: {fileID: 0}
+  IconRoot: {fileID: 0}
+  IconPrefab: {fileID: 5982157463999560140, guid: 417874630d1b336458bee173697a86df, type: 3}
+  NotiPrefab: {fileID: 1365517833701255112, guid: e5133a600d3d38b47a2c15b496dc28cc, type: 3}
   typeSeqManager: {fileID: 0}
   typeSeqEvent: {fileID: 0}
   sequenceKeys:
@@ -1237,12 +1242,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 985118235815408610, guid: 47a9dffa23a444bdbaaf9b4f0159884d, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 985118235815408610, guid: 47a9dffa23a444bdbaaf9b4f0159884d, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 985118235815408610, guid: 47a9dffa23a444bdbaaf9b4f0159884d, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 985118235815408610, guid: 47a9dffa23a444bdbaaf9b4f0159884d, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4289986689
       objectReference: {fileID: 0}
     - target: {fileID: 985118235815408610, guid: 47a9dffa23a444bdbaaf9b4f0159884d, type: 3}
       propertyPath: m_TextStyleHashCode
       value: -1183493901
+      objectReference: {fileID: 0}
+    - target: {fileID: 3397340536117088742, guid: 47a9dffa23a444bdbaaf9b4f0159884d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -81
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47a9dffa23a444bdbaaf9b4f0159884d, type: 3}

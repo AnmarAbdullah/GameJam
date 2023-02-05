@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public abstract class BodyEvent : MonoBehaviour
 {
-
+    public BodyEventDifficultyData data;
     EventManager manager;
     Navigation nav;
     public NavigationPoint eventPoint { get; private set; }
@@ -15,6 +15,9 @@ public abstract class BodyEvent : MonoBehaviour
     bool reachTime;
     public Slider timeSlider;
 
+    public GameObject IconRoot;
+    public GameObject IconPrefab;
+    GameObject Icon;
     GameObject PanelRoot;
     [SerializeField] GameObject NotiPrefab;
     GameObject notification;
@@ -23,6 +26,7 @@ public abstract class BodyEvent : MonoBehaviour
     void Awake()
     {
         PanelRoot = GameObject.FindGameObjectWithTag("Panel");
+        IconRoot = GameObject.FindGameObjectWithTag("IconRoot");
     }
 
     // Update is called once per frame
@@ -45,7 +49,7 @@ public abstract class BodyEvent : MonoBehaviour
         }
     }
 
-    public virtual void CreateEvent(EventManager eManager, NavigationPoint point, float timeToReach)
+    public virtual void CreateEvent(EventManager eManager, NavigationPoint point, float timeToReach, float diffPrecent)
     {
         manager = eManager;
         eventPoint = point;
@@ -54,6 +58,10 @@ public abstract class BodyEvent : MonoBehaviour
         notification.transform.parent = PanelRoot.transform;
         notification.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"Location: {point.name}";
         notification.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = $"Problem: You have cancer...";
+
+        Icon = Instantiate(IconPrefab, IconRoot.transform);
+        Icon.GetComponent<EventIcon>().SetupIcon(this, timeToReach);
+
 
         Slider slider = notification.transform.GetChild(2).GetComponent<Slider>();
         slider.maxValue = timeToReach;
@@ -76,12 +84,14 @@ public abstract class BodyEvent : MonoBehaviour
     public void Completed()
     {
         Destroy(notification);
+        Destroy(Icon);
         manager.EventCompleted(this);
     }
 
     public void Failed()
     {
         Destroy(notification);
+        Destroy(Icon);
         manager.EventFailed(this);
     }
 }
