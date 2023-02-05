@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Panel
   - IconRoot
+  - Panel
+  - IconRoot
   layers:
   - Default
   - TransparentFX
