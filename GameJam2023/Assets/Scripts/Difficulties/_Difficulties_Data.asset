@@ -12,6 +12,73 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074478b9b77b01e449fc76a27726daa1, type: 3}
   m_Name: _Difficulties_Data
   m_EditorClassIdentifier: 
+  intervalCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.2
+      value: 1
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 2
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7
+      value: 3
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 4
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  IntervalDifficulty:
+  - minInterval: 15
+    maxInterval: 30
+    timeToReach: {x: 20, y: 30}
+  - minInterval: 10
+    maxInterval: 20
+    timeToReach: {x: 15, y: 20}
+  - minInterval: 10
+    maxInterval: 15
+    timeToReach: {x: 10, y: 15}
+  - minInterval: 5
+    maxInterval: 15
+    timeToReach: {x: 5, y: 10}
+  - minInterval: 5
+    maxInterval: 10
+    timeToReach: {x: 5, y: 5}
   dotsCurve:
     serializedVersion: 2
     m_Curve:

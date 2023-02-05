@@ -130,7 +130,7 @@ public class QTEManager : MonoBehaviour
         {
             ui.eventUI.SetActive(false);
         }
-        
+
         //Should call events
         if (eventData.onFail != null && isFail)
         {
@@ -212,7 +212,7 @@ public class QTEManager : MonoBehaviour
             else
             {
                 isFail = true;
-                Debug.Log("Incorrect Input");      //For Debugging
+                Debug.Log($"{key.keyboardKey.ToString()} Incorrect Input. The correct input is: {keys[0].keyboardKey.ToString()}");      //For Debugging
             }
         }
         if (Input.GetKeyUp(key.keyboardKey) && eventData.pressType == QTEPressType.Simultaneously)
@@ -288,8 +288,9 @@ public class QTEManager : MonoBehaviour
         {
             ui.eventText.text = "";
             //eventData.keys.ForEach(key => ui.eventText.text += key.keyboardKey + "+");
-
+            
             keys.ForEach(key => ui.eventText.text += key.keyboardKey + " ");
+
             eventData.keyboardUI.eventText.text = ui.eventText.text.Remove(ui.eventText.text.Length - 1);
         }
         if (ui.eventUI != null)

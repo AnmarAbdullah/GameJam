@@ -8,6 +8,10 @@ using UnityEngine.Animations;
 [Serializable]
 public class BodyEventDifficultyData : ScriptableObject
 {
+    [Header("Event Intervals")]
+    public AnimationCurve intervalCurve;
+    public IntervalDifficulty[] IntervalDifficulty;
+
     [Header("Dots")]
     public AnimationCurve dotsCurve;
     public DotsDifficulty[] DotsDifficulty;
@@ -20,6 +24,14 @@ public class BodyEventDifficultyData : ScriptableObject
     [Header("Path")]
     public AnimationCurve pathCurve;
     public PathDifficulty[] PathDifficulty;
+}
+
+[System.Serializable]
+public class IntervalDifficulty
+{
+    public int minInterval;
+    public int maxInterval;
+    public Vector2 timeToReach;
 }
 
 [System.Serializable]

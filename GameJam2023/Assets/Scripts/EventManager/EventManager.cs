@@ -6,12 +6,12 @@ using TMPro;
 
 public class EventManager : MonoBehaviour
 {
+    public BodyEventDifficultyData data;
 
     public int lives;
     int PlayerLives;
     bool gameOver;
     public Slider LifeSlider;
-
 
     public float GameDuration;
     public TMP_Text timerText;
@@ -106,7 +106,10 @@ public class EventManager : MonoBehaviour
 
     void SetIntervalTime()
     {
-        intervalPeriod = Random.Range(eventIntervalRange.x, eventIntervalRange.y);
+        float DifficultyPercent = GameTimer / GameDuration;
+        int diffIndex = (int)data.intervalCurve.Evaluate(DifficultyPercent);
+
+        intervalPeriod = Random.Range(data.IntervalDifficulty[diffIndex].minInterval, data.IntervalDifficulty[diffIndex].maxInterval);
         intervalTimer = 0;
         runInterval = true;
     }
@@ -144,8 +147,11 @@ public class EventManager : MonoBehaviour
         BodyEvent instanceEvent = eventInstance.GetComponent<BodyEvent>();
 
         float DifficultyPercent = GameTimer / GameDuration;
+        int reachIndex = (int)data.intervalCurve.Evaluate(DifficultyPercent);
+        float reachTime = Random.Range(data.IntervalDifficulty[reachIndex].timeToReach.x, data.IntervalDifficulty[reachIndex].timeToReach.x);
 
-        instanceEvent.CreateEvent(this, eventPoint, TimeToReachEvent, DifficultyPercent);
+
+        instanceEvent.CreateEvent(this, eventPoint, reachTime, DifficultyPercent);
         activeEvents.Add(instanceEvent);
 
         Debug.Log("Event Created at: " + eventPoint.name);
