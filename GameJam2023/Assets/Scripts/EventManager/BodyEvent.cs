@@ -51,6 +51,10 @@ public abstract class BodyEvent : MonoBehaviour
             {
                 reachTimer += Time.deltaTime;
                 timeSlider.value = TimeToReachEvent - reachTimer;
+                if(timeSlider.value <= timeSlider.maxValue / 2)
+                {
+                    anim.Play();
+                }
             }
         }
     }
@@ -92,7 +96,8 @@ public abstract class BodyEvent : MonoBehaviour
                 break;
         }
         
-        Animation anima = notification.transform.GetChild(5).GetComponent<Animation>();
+        Animation anima = notification.GetComponentInChildren<Animation>();
+        anim = anima;
 
         TimeToReachEvent = timeToReach;
         reachTimer = 0;
