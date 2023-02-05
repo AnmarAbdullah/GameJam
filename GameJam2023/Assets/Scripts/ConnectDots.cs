@@ -104,6 +104,7 @@ public class ConnectDots : MonoBehaviour
                 Debug.Log("loss");
                 lr.enabled=false;
                 ev.Failed();
+                // play sound effect of fail
                 eventStarted = false;
             }
 
@@ -117,6 +118,8 @@ public class ConnectDots : MonoBehaviour
                         Debug.Log("loss");
                         lr.enabled = false;
                         ev.Failed();
+                        // play sound effect of fail
+                        eventStarted = false;
                     }
                 }
             }
@@ -126,6 +129,7 @@ public class ConnectDots : MonoBehaviour
                 //activate win condition
                 lr.enabled = false;
                 print("win");
+                //play sound effect of win
                 ev.Completed();
                 eventStarted = false;
             }
@@ -140,6 +144,7 @@ public class ConnectDots : MonoBehaviour
                     makeLine(hit.collider.transform);
                     indic.position = hit.collider.transform.position;
                     print(hit.collider.name);
+                    // play sound effect of dot clicking
                     if (hit.collider != null) { }
                 }
             }
